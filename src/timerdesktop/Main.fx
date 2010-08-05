@@ -6,28 +6,53 @@
 package timerdesktop;
 
 import com.tonipenya.Task;
-import aaa.Core;
 import com.tonipenya.TimerManager;
 import com.tonipenya.ITask;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import javafx.scene.input.MouseEvent;
 
 /**
  * @author tonipenya
  */
-var manager;
-var tasksXX: ITask[];
+var manager = new TimerManager();
+var tasks: ITask[];
+var models: TaskModel[];
 var timeline = Timeline { repeatCount: Timeline.INDEFINITE
             keyFrames: [
                 KeyFrame {
                     time: 1s
                     action: function() {
-                        java.lang.System.out.println("called");
-                        tasksXX = manager.getAsArray();
+                        delete models;
+
+                        for (task in tasks) {
+                            var model = new Main.TaskModel();
+
+                            if (manager.isTaskRunning(task)) {
+                                model.label = "{task.getName()} {manager.getTimeRemaining(task)}";
+                            } else {
+                                model.label = "{task.getName()} {task.getInterval()}";
+
+                            }
+
+                            model.running = manager.isTaskRunning(task);
+                            insert model into models;
+                        }
                     }
                 }
             ];
         };
+var taskID = 0;
+
+public class TaskModel {
+    var label: String;
+    var running: Boolean;
+
+    function clicked(e: MouseEvent): Void {
+        java.lang.System.out.println("clicked");
+    }
+
+}
 
 public class Main {
 
@@ -39,7 +64,7 @@ public class Main {
         layoutX: 114.0
         layoutY: 89.0
         layoutInfo: __layoutInfo_lstTimers
-        items: bind tasksXX
+        items: bind models
     }
     
     public-read def lblName: javafx.scene.control.Label = javafx.scene.control.Label {
@@ -169,16 +194,14 @@ public class Main {
     function listCellFactory2(): javafx.scene.control.ListCell {
         var listCell: javafx.scene.control.ListCell;
         
-        def lblName2: javafx.scene.control.Label = javafx.scene.control.Label {
-            text: bind (listCell.item as com.tonipenya.ITask).getName()
-        }
-        
-        def lblTime: javafx.scene.control.Label = javafx.scene.control.Label {
-            text: bind "{manager.getTimeRemaining(listCell.item as com.tonipenya.ITask)}"
+        def checkbox: javafx.scene.control.CheckBox = javafx.scene.control.CheckBox {
+            onMouseClicked: bind (listCell.item as TaskModel).clicked
+            text: bind (listCell.item as TaskModel).label
+            selected: bind (listCell.item as TaskModel).running with inverse
         }
         
         def hbox2: javafx.scene.layout.HBox = javafx.scene.layout.HBox {
-            content: [ lblName2, lblTime, ]
+            content: [ checkbox, ]
             spacing: 6.0
         }
         
@@ -198,16 +221,12 @@ public class Main {
     }
     // </editor-fold>//GEN-END:main
 
-    function tasks(): Object[] {
-        manager.getRunningTasks().toArray();
-    }
-
     function btnAddActionAtmain(): Void {
         currentState.next();
     }
 
     function addAction(): Void {
-        manager.startTimer(new Task(1, txtName.text, Integer.parseInt(txtDelay.text)));
+        insert new Task(taskID++, txtName.text, Long.parseLong(txtDelay.text)) into tasks;
 
         currentState.previous();
     }
@@ -215,11 +234,20 @@ public class Main {
 }
 
 function run (): Void {
-    var design = Main {};
-    manager = new TimerManager();
+
+    insert new Task(1, "task 1", 5000) into tasks;
+    insert new Task(2, "task 2", 10000) into tasks;
+    insert new Task(3, "task 3", 8000) into tasks;
+    insert new Task(4, "task 4", 10000) into tasks;
+    taskID = 5;
+
+    manager.startTimer(tasks[0]);
+    manager.startTimer(tasks[2]);
+
     timeline.play();
 
-    manager.startTimer(new Task(1, "tocoto", 20000));
+
+    var design = Main {};
 
     javafx.stage.Stage {
         title: "Main"

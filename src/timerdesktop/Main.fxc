@@ -56,35 +56,27 @@
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
         <List name="content">
-            <Item value="inst:LabelModel1"/>
-            <Item value="inst:LabelModel2"/>
+            <Item value="inst:CheckBoxModel1"/>
         </List>
         <Reference name="spacing" value="prop2:7,NOT_SET,4,null,4,null,14,anim:,,flt:6.0,4,null,"/>
     </Instance>
-    <Instance classID="LabelModel" instanceID="LabelModel1">
-        <Reference name="instanceName" value="str:lblName2"/>
+    <Instance classID="CheckBoxModel" instanceID="CheckBoxModel1">
+        <Reference name="instanceName" value="str:checkbox"/>
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
+        <Reference name="onMouseClicked" value="prop2:7,NOT_SET,4,null,45,str:bind (listCell.item as TaskModel).clicked,4,null,4,null,"/>
         <Reference name="clip" value="null"/>
         <Reference name="tooltip" value="null"/>
-        <Reference name="text" value="prop2:7,NOT_SET,4,null,57,str:bind (listCell.item as com.tonipenya.ITask).getName(),4,null,4,null,"/>
+        <Reference name="text" value="prop2:7,NOT_SET,4,null,43,str:bind (listCell.item as TaskModel).label,4,null,4,null,"/>
         <Reference name="graphic" value="null"/>
-    </Instance>
-    <Instance classID="LabelModel" instanceID="LabelModel2">
-        <Reference name="instanceName" value="str:lblTime"/>
-        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
-        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
-        <Reference name="clip" value="null"/>
-        <Reference name="tooltip" value="null"/>
-        <Reference name="text" value="prop2:7,NOT_SET,4,null,75,str:bind &quot;{manager.getTimeRemaining(listCell.item as com.tonipenya.ITask)}&quot;,4,null,4,null,"/>
-        <Reference name="graphic" value="null"/>
+        <Reference name="selected" value="prop2:7,NOT_SET,4,null,58,str:bind (listCell.item as TaskModel).running with inverse,4,null,4,null,"/>
     </Instance>
     <Instance classID="SceneModel" instanceID="SceneModel1">
         <Reference name="instanceName" value="str:scene"/>
         <List name="content">
             <Item value="inst:ListViewModel1"/>
-            <Item value="inst:LabelModel3"/>
-            <Item value="inst:LabelModel4"/>
+            <Item value="inst:LabelModel1"/>
+            <Item value="inst:LabelModel2"/>
             <Item value="inst:TextBoxModel1"/>
             <Item value="inst:TextBoxModel2"/>
             <Item value="inst:ButtonModel1"/>
@@ -107,10 +99,10 @@
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
         <Reference name="tooltip" value="null"/>
-        <Reference name="items" value="prop2:7,NOT_SET,4,null,16,str:bind tasksXX,4,null,4,null,"/>
+        <Reference name="items" value="prop2:7,NOT_SET,4,null,15,str:bind models,4,null,4,null,"/>
         <Reference name="cellFactory" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,33,anim:,,inst:ListCellFactoryModel1,16,inst:StateModel2,11,anim:,,null,"/>
     </Instance>
-    <Instance classID="LabelModel" instanceID="LabelModel3">
+    <Instance classID="LabelModel" instanceID="LabelModel1">
         <Reference name="instanceName" value="str:lblName"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:87.0,24,inst:StateVariableModel1,16,inst:StateModel2,14,anim:,,flt:6.0,"/>
@@ -122,7 +114,7 @@
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,str:Label,24,inst:StateVariableModel1,16,inst:StateModel2,15,anim:,,str:Name,"/>
         <Reference name="graphic" value="null"/>
     </Instance>
-    <Instance classID="LabelModel" instanceID="LabelModel4">
+    <Instance classID="LabelModel" instanceID="LabelModel2">
         <Reference name="instanceName" value="str:lblDelay"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:81.0,24,inst:StateVariableModel1,16,inst:StateModel2,14,anim:,,flt:6.0,"/>
