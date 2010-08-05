@@ -10,48 +10,55 @@ import com.tonipenya.TimerManager;
 import com.tonipenya.ITask;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.scene.input.MouseEvent;
 
 /**
  * @author tonipenya
  */
 var manager = new TimerManager();
-var tasks: ITask[];
 var models: TaskModel[];
 var timeline = Timeline { repeatCount: Timeline.INDEFINITE
             keyFrames: [
                 KeyFrame {
                     time: 1s
                     action: function() {
-                        delete models;
-
-                        for (task in tasks) {
-                            var model = new Main.TaskModel();
-
-                            if (manager.isTaskRunning(task)) {
-                                model.label = "{task.getName()} {manager.getTimeRemaining(task)}";
-                            } else {
-                                model.label = "{task.getName()} {task.getInterval()}";
-
-                            }
-
-                            model.running = manager.isTaskRunning(task);
-                            insert model into models;
+                        models = reverse models;
                         }
                     }
-                }
             ];
         };
 var taskID = 0;
 
 public class TaskModel {
-    var label: String;
-    var running: Boolean;
 
-    function clicked(e: MouseEvent): Void {
-        java.lang.System.out.println("clicked");
+    var task: ITask;
+
+    function startStopTask(): Void {
+        if (manager.isTaskRunning(task)) {
+            manager.stopTimer(task);
+        } else {
+            manager.startTimer(task);
+        }
     }
 
+    function getLabelText(): String {
+        var text :String = task.getName();
+
+        if (manager.isTaskRunning(task)) {
+            text += manager.getTimeRemaining(task);
+        } else {
+            text += task.getInterval();
+        }
+
+        return text;
+    }
+
+    function getButtonText(): String {
+        if (manager.isTaskRunning(task)) {
+            return "stop";
+        } else {
+            return "start";
+        }
+    }
 }
 
 public class Main {
@@ -194,15 +201,19 @@ public class Main {
     function listCellFactory2(): javafx.scene.control.ListCell {
         var listCell: javafx.scene.control.ListCell;
         
-        def checkbox: javafx.scene.control.CheckBox = javafx.scene.control.CheckBox {
-            onMouseClicked: bind (listCell.item as TaskModel).clicked
-            text: bind (listCell.item as TaskModel).label
-            selected: bind (listCell.item as TaskModel).running with inverse
+        def btnTask: javafx.scene.control.Button = javafx.scene.control.Button {
+            text: bind (listCell.item as TaskModel).getButtonText()
+            action: bind (listCell.item as TaskModel).startStopTask
+        }
+        
+        def lblTask: javafx.scene.control.Label = javafx.scene.control.Label {
+            text: bind (listCell.item as TaskModel).getLabelText()
         }
         
         def hbox2: javafx.scene.layout.HBox = javafx.scene.layout.HBox {
-            content: [ checkbox, ]
+            content: [ btnTask, lblTask, ]
             spacing: 6.0
+            fillHeight: true
         }
         
         listCell = javafx.scene.control.ListCell {
@@ -226,7 +237,7 @@ public class Main {
     }
 
     function addAction(): Void {
-        insert new Task(taskID++, txtName.text, Long.parseLong(txtDelay.text)) into tasks;
+        insert TaskModel {task: new Task(taskID++, txtName.text, Long.parseLong(txtDelay.text))} into models;
 
         currentState.previous();
     }
@@ -234,18 +245,13 @@ public class Main {
 }
 
 function run (): Void {
-
-    insert new Task(1, "task 1", 5000) into tasks;
-    insert new Task(2, "task 2", 10000) into tasks;
-    insert new Task(3, "task 3", 8000) into tasks;
-    insert new Task(4, "task 4", 10000) into tasks;
+    insert TaskModel {task: new Task(1, "task 1", 5000) } into models;
+    insert TaskModel {task: new Task(2, "task 2", 10000) } into models;
+    insert TaskModel {task: new Task(3, "task 3", 8000) } into models;
+    insert TaskModel {task: new Task(4, "task 4", 10000) } into models;
     taskID = 5;
 
-    manager.startTimer(tasks[0]);
-    manager.startTimer(tasks[2]);
-
     timeline.play();
-
 
     var design = Main {};
 

@@ -56,31 +56,41 @@
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
         <List name="content">
-            <Item value="inst:CheckBoxModel1"/>
+            <Item value="inst:ButtonModel1"/>
+            <Item value="inst:LabelModel1"/>
         </List>
         <Reference name="spacing" value="prop2:7,NOT_SET,4,null,4,null,14,anim:,,flt:6.0,4,null,"/>
+        <Reference name="fillHeight" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,bool:true,4,null,"/>
     </Instance>
-    <Instance classID="CheckBoxModel" instanceID="CheckBoxModel1">
-        <Reference name="instanceName" value="str:checkbox"/>
+    <Instance classID="ButtonModel" instanceID="ButtonModel1">
+        <Reference name="instanceName" value="str:btnTask"/>
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
-        <Reference name="onMouseClicked" value="prop2:7,NOT_SET,4,null,45,str:bind (listCell.item as TaskModel).clicked,4,null,4,null,"/>
         <Reference name="clip" value="null"/>
         <Reference name="tooltip" value="null"/>
-        <Reference name="text" value="prop2:7,NOT_SET,4,null,43,str:bind (listCell.item as TaskModel).label,4,null,4,null,"/>
+        <Reference name="text" value="prop2:7,NOT_SET,4,null,53,str:bind (listCell.item as TaskModel).getButtonText(),4,null,4,null,"/>
         <Reference name="graphic" value="null"/>
-        <Reference name="selected" value="prop2:7,NOT_SET,4,null,58,str:bind (listCell.item as TaskModel).running with inverse,4,null,4,null,"/>
+        <Reference name="action" value="prop2:7,NOT_SET,4,null,51,str:bind (listCell.item as TaskModel).startStopTask,4,null,4,null,"/>
+    </Instance>
+    <Instance classID="LabelModel" instanceID="LabelModel1">
+        <Reference name="instanceName" value="str:lblTask"/>
+        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
+        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
+        <Reference name="clip" value="null"/>
+        <Reference name="tooltip" value="null"/>
+        <Reference name="text" value="prop2:7,NOT_SET,4,null,52,str:bind (listCell.item as TaskModel).getLabelText(),4,null,4,null,"/>
+        <Reference name="graphic" value="null"/>
     </Instance>
     <Instance classID="SceneModel" instanceID="SceneModel1">
         <Reference name="instanceName" value="str:scene"/>
         <List name="content">
             <Item value="inst:ListViewModel1"/>
-            <Item value="inst:LabelModel1"/>
             <Item value="inst:LabelModel2"/>
+            <Item value="inst:LabelModel3"/>
             <Item value="inst:TextBoxModel1"/>
             <Item value="inst:TextBoxModel2"/>
-            <Item value="inst:ButtonModel1"/>
             <Item value="inst:ButtonModel2"/>
+            <Item value="inst:ButtonModel3"/>
         </List>
         <Reference name="width" value="prop2:7,NOT_SET,4,null,4,null,25,anim:0,DISCRETE,flt:480.0,4,null,"/>
         <Reference name="height" value="prop2:7,NOT_SET,4,null,4,null,25,anim:0,DISCRETE,flt:320.0,4,null,"/>
@@ -102,7 +112,7 @@
         <Reference name="items" value="prop2:7,NOT_SET,4,null,15,str:bind models,4,null,4,null,"/>
         <Reference name="cellFactory" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,33,anim:,,inst:ListCellFactoryModel1,16,inst:StateModel2,11,anim:,,null,"/>
     </Instance>
-    <Instance classID="LabelModel" instanceID="LabelModel1">
+    <Instance classID="LabelModel" instanceID="LabelModel2">
         <Reference name="instanceName" value="str:lblName"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:87.0,24,inst:StateVariableModel1,16,inst:StateModel2,14,anim:,,flt:6.0,"/>
@@ -114,7 +124,7 @@
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,str:Label,24,inst:StateVariableModel1,16,inst:StateModel2,15,anim:,,str:Name,"/>
         <Reference name="graphic" value="null"/>
     </Instance>
-    <Instance classID="LabelModel" instanceID="LabelModel2">
+    <Instance classID="LabelModel" instanceID="LabelModel3">
         <Reference name="instanceName" value="str:lblDelay"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:81.0,24,inst:StateVariableModel1,16,inst:StateModel2,14,anim:,,flt:6.0,"/>
@@ -146,7 +156,7 @@
         <Reference name="clip" value="null"/>
         <Reference name="tooltip" value="null"/>
     </Instance>
-    <Instance classID="ButtonModel" instanceID="ButtonModel1">
+    <Instance classID="ButtonModel" instanceID="ButtonModel2">
         <Reference name="instanceName" value="str:btnOk"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:214.0,24,inst:StateVariableModel1,16,inst:StateModel2,15,anim:,,flt:40.0,"/>
@@ -159,7 +169,7 @@
         <Reference name="graphic" value="null"/>
         <Reference name="action" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel2,20,anim:,,str:addAction,"/>
     </Instance>
-    <Instance classID="ButtonModel" instanceID="ButtonModel2">
+    <Instance classID="ButtonModel" instanceID="ButtonModel3">
         <Reference name="instanceName" value="str:btnAdd"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:373.0,4,null,"/>
