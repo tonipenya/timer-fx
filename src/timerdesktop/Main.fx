@@ -14,9 +14,10 @@ import javafx.animation.KeyFrame;
 /**
  * @author tonipenya
  */
-var manager = new TimerManager();
+def manager = new TimerManager();
 var models: TaskModel[];
 var taskID = 0;
+var edit: Boolean;
 
 public class TaskModel {
 
@@ -60,7 +61,7 @@ public class TaskModel {
             millis = task.getInterval();
         }
 
-// TODO: Hours not displaying properly
+        // TODO: Hours not displaying properly
         labelText = "{%tH millis}:{%tM millis}:{%tS millis} - {task.getName()}";
 
         if (manager.isTaskRunning(task)) {
@@ -69,7 +70,6 @@ public class TaskModel {
             buttonText = "start";
         }
     }
-
 }
 
 public class Main {
@@ -112,6 +112,7 @@ public class Main {
         layoutX: 197.0
         layoutY: 39.0
         layoutInfo: __layoutInfo_txtHours
+        text: "00"
     }
     
     def __layoutInfo_txtMinutes: javafx.scene.layout.LayoutInfo = javafx.scene.layout.LayoutInfo {
@@ -121,6 +122,7 @@ public class Main {
         layoutX: 303.0
         layoutY: 39.0
         layoutInfo: __layoutInfo_txtMinutes
+        text: "00"
     }
     
     def __layoutInfo_txtSeconds: javafx.scene.layout.LayoutInfo = javafx.scene.layout.LayoutInfo {
@@ -130,6 +132,7 @@ public class Main {
         layoutX: 396.0
         layoutY: 39.0
         layoutInfo: __layoutInfo_txtSeconds
+        text: "00"
     }
     
     public-read def flow: javafx.scene.layout.Flow = javafx.scene.layout.Flow {
@@ -143,9 +146,23 @@ public class Main {
     
     public-read def btnOk: javafx.scene.control.Button = javafx.scene.control.Button {
         visible: false
-        layoutX: 214.0
-        layoutY: 124.0
+        layoutX: 114.0
+        layoutY: 114.0
         text: "Button"
+    }
+    
+    public-read def btnCancel: javafx.scene.control.Button = javafx.scene.control.Button {
+        visible: false
+        text: "Button"
+    }
+    
+    public-read def flow2: javafx.scene.layout.Flow = javafx.scene.layout.Flow {
+        visible: false
+        layoutX: 245.0
+        layoutY: 101.0
+        content: [ btnOk, btnCancel, ]
+        hgap: 6.0
+        vgap: 6.0
     }
     
     public-read def grid: com.javafx.preview.layout.Grid = com.javafx.preview.layout.Grid {
@@ -162,7 +179,7 @@ public class Main {
                 cells: [ lblDelay, flow, ]
             }
             com.javafx.preview.layout.GridRow {
-                cells: [ btnOk, ]
+                cells: [ javafx.scene.shape.Rectangle { fill: null }, flow2, ]
             }
         ]
     }
@@ -235,23 +252,24 @@ public class Main {
                             txtHours.visible = false;
                             txtHours.layoutX = 197.0;
                             txtHours.layoutY = 39.0;
-                            txtHours.text = null;
                             txtMinutes.visible = false;
                             txtMinutes.layoutX = 303.0;
                             txtMinutes.layoutY = 39.0;
-                            txtMinutes.text = null;
                             txtSeconds.visible = false;
                             txtSeconds.layoutX = 396.0;
                             txtSeconds.layoutY = 39.0;
-                            txtSeconds.text = null;
                             flow.visible = false;
                             flow.layoutX = 267.0;
                             flow.layoutY = 33.0;
                             flow.wrapLength = 400.0;
                             btnOk.visible = false;
-                            btnOk.layoutX = 214.0;
-                            btnOk.layoutY = 124.0;
+                            btnOk.layoutX = 114.0;
+                            btnOk.layoutY = 114.0;
                             btnOk.text = "Button";
+                            btnCancel.visible = false;
+                            btnCancel.text = "Button";
+                            flow2.visible = false;
+                            flow2.wrapLength = 400.0;
                             grid.visible = false;
                             grid.layoutX = 210.0;
                             grid.layoutY = 33.0;
@@ -265,8 +283,10 @@ public class Main {
                             btnEdit.visible = true;
                             __layoutInfo_btnEdit.width = 54.0;
                             btnEdit.text = "Edit";
+                            btnEdit.action = btnEditActionAtmain;
                             btnDelete.visible = true;
                             btnDelete.text = "Delete";
+                            btnDelete.action = btnDeleteActionAtmain;
                             vbox.visible = true;
                             vbox.layoutX = 244.0;
                             vbox.layoutY = 6.0;
@@ -298,18 +318,15 @@ public class Main {
                             txtHours.layoutX = 43.0;
                             txtHours.layoutY = 39.0;
                             __layoutInfo_txtHours.width = 29.0;
-                            txtHours.text = "0";
                             txtHours.font = null;
                             txtMinutes.visible = true;
                             txtMinutes.layoutX = 73.0;
                             txtMinutes.layoutY = 41.0;
                             __layoutInfo_txtMinutes.width = 29.0;
-                            txtMinutes.text = "0";
                             txtSeconds.visible = true;
                             txtSeconds.layoutX = 197.0;
                             txtSeconds.layoutY = 104.0;
                             __layoutInfo_txtSeconds.width = 29.0;
-                            txtSeconds.text = "0";
                             flow.visible = true;
                             flow.layoutX = 158.0;
                             flow.layoutY = 143.0;
@@ -319,6 +336,11 @@ public class Main {
                             btnOk.layoutY = 98.0;
                             btnOk.text = "OK";
                             btnOk.action = addAction;
+                            btnCancel.visible = true;
+                            btnCancel.text = "Cancel";
+                            btnCancel.action = btnCancelActionAtedit;
+                            flow2.visible = true;
+                            flow2.wrapLength = 100.0;
                             grid.visible = true;
                             grid.layoutX = 6.0;
                             grid.layoutY = 8.0;
@@ -375,7 +397,38 @@ public class Main {
     // </editor-fold>//GEN-END:main
 
     function btnAddActionAtmain(): Void {
+        txtHours.text = "00";
+        txtMinutes.text = "00";
+        txtSeconds.text = "00";
+        txtName.text = "";
+
+        edit = false;
         currentState.next();
+    }
+
+    function btnEditActionAtmain(): Void {
+        if (lstTimers.selectedItem == null) {
+            return;
+        }
+
+        def model = lstTimers.selectedItem as TaskModel;
+        var millis = model.task.getInterval();
+
+        txtName.text = model.task.getName();
+        txtHours.text = "{%tH millis}";
+        txtMinutes.text = "{%tM millis}";
+        txtSeconds.text = "{%tS millis}";
+
+        edit = true;
+        currentState.next();
+    }
+
+    function btnDeleteActionAtmain(): Void {
+        if (lstTimers.selectedItem == null) {
+            return;
+        }
+        
+        delete lstTimers.selectedItem as TaskModel from models;
     }
 
     function addAction(): Void {
@@ -384,16 +437,19 @@ public class Main {
         var seconds = Long.parseLong(txtSeconds.text);
         var millis = hours * 3600 * 1000 + minutes * 60 * 1000 + seconds * 1000;
 
-        insert TaskModel { task: new Task(taskID++, txtName.text, millis)} into models;
-
-        txtHours.text = "0";
-        txtMinutes.text = "0";
-        txtSeconds.text = "0";
-        txtName.text = "";
+        if (edit) {
+            def model:TaskModel = lstTimers.selectedItem as TaskModel;
+            models[lstTimers.selectedIndex]= TaskModel {task: new Task(model.task.getId(), txtName.text, millis) };
+        } else {
+            insert TaskModel { task: new Task(taskID++, txtName.text, millis)} into models;
+        }
 
         currentState.previous();
     }
 
+    function btnCancelActionAtedit(): Void {
+        currentState.previous();
+    }
 }
 
 function run (): Void {
