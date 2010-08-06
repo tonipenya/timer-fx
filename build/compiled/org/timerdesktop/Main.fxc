@@ -13,7 +13,7 @@
         <Reference name="designWidth" value="flt:480.0"/>
         <Reference name="designHeight" value="flt:320.0"/>
         <Reference name="designProfile" value="profile:DESKTOP"/>
-        <Reference name="synchronizeDeviceAndSceneSizes" value="bool:false"/>
+        <Reference name="synchronizeDeviceAndSceneSizes" value="bool:true"/>
     </Instance>
     <Instance classID="StateVariableModel" instanceID="StateVariableModel1">
         <Reference name="instanceName" value="str:currentState"/>
@@ -85,10 +85,10 @@
         <Reference name="instanceName" value="str:scene"/>
         <List name="content">
             <Item value="inst:ListViewModel1"/>
+            <Item value="inst:ButtonModel2"/>
             <Item value="inst:GridModel1"/>
-            <Item value="inst:VBoxModel1"/>
         </List>
-        <Reference name="width" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:350.0,4,null,"/>
+        <Reference name="width" value="prop2:7,NOT_SET,4,null,4,null,25,anim:0,DISCRETE,flt:480.0,4,null,"/>
         <Reference name="height" value="prop2:7,NOT_SET,4,null,4,null,25,anim:0,DISCRETE,flt:320.0,4,null,"/>
         <Reference name="generateSceneInstance" value="bool:true"/>
         <Reference name="generateGetDesignSceneFunction" value="bool:true"/>
@@ -108,6 +108,20 @@
         <Reference name="items" value="prop2:7,NOT_SET,4,null,15,str:bind models,4,null,4,null,"/>
         <Reference name="cellFactory" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,33,anim:,,inst:ListCellFactoryModel1,16,inst:StateModel2,11,anim:,,null,"/>
     </Instance>
+    <Instance classID="ButtonModel" instanceID="ButtonModel2">
+        <Reference name="instanceName" value="str:btnAdd"/>
+        <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,bool:true,"/>
+        <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:373.0,4,null,"/>
+        <Reference name="layoutY" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:56.0,4,null,"/>
+        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
+        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
+        <Reference name="clip" value="null"/>
+        <Reference name="tooltip" value="null"/>
+        <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,14,anim:,,str:Add,"/>
+        <Reference name="font" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,11,anim:,,null,"/>
+        <Reference name="graphic" value="null"/>
+        <Reference name="action" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,29,anim:,,str:btnAddActionAtmain,"/>
+    </Instance>
     <Instance classID="GridModel" instanceID="GridModel1">
         <Reference name="instanceName" value="str:grid"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
@@ -121,7 +135,7 @@
             <Item value="inst:TextBoxModel1"/>
             <Item value="inst:LabelModel3"/>
             <Item value="inst:FlowModel1"/>
-            <Item value="inst:ButtonModel2"/>
+            <Item value="inst:ButtonModel3"/>
         </List>
         <Reference name="hgap" value="prop2:7,NOT_SET,4,null,4,null,14,anim:,,flt:6.0,4,null,"/>
         <Reference name="vgap" value="prop2:7,NOT_SET,4,null,4,null,14,anim:,,flt:6.0,4,null,"/>
@@ -216,7 +230,7 @@
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel2,12,anim:,,str:0,"/>
     </Instance>
-    <Instance classID="ButtonModel" instanceID="ButtonModel2">
+    <Instance classID="ButtonModel" instanceID="ButtonModel3">
         <Reference name="instanceName" value="str:btnOk"/>
         <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,bool:true,"/>
         <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:214.0,24,inst:StateVariableModel1,16,inst:StateModel2,15,anim:,,flt:37.0,"/>
@@ -228,58 +242,5 @@
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel2,13,anim:,,str:OK,"/>
         <Reference name="graphic" value="null"/>
         <Reference name="action" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel2,20,anim:,,str:addAction,"/>
-    </Instance>
-    <Instance classID="VBoxModel" instanceID="VBoxModel1">
-        <Reference name="instanceName" value="str:vbox"/>
-        <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,bool:true,"/>
-        <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:298.0,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,flt:244.0,"/>
-        <Reference name="layoutY" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:211.0,24,inst:StateVariableModel1,16,inst:StateModel1,14,anim:,,flt:6.0,"/>
-        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
-        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
-        <Reference name="clip" value="null"/>
-        <List name="content">
-            <Item value="inst:ButtonModel3"/>
-            <Item value="inst:ButtonModel4"/>
-            <Item value="inst:ButtonModel5"/>
-        </List>
-        <Reference name="spacing" value="prop2:7,NOT_SET,4,null,4,null,14,anim:,,flt:6.0,4,null,"/>
-    </Instance>
-    <Instance classID="ButtonModel" instanceID="ButtonModel3">
-        <Reference name="instanceName" value="str:btnAdd"/>
-        <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,bool:true,"/>
-        <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:373.0,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,flt:298.0,"/>
-        <Reference name="layoutY" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:56.0,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,flt:246.0,"/>
-        <Reference name="layoutInfoWidth" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,15,anim:,,flt:54.0,"/>
-        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
-        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
-        <Reference name="clip" value="null"/>
-        <Reference name="tooltip" value="null"/>
-        <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,14,anim:,,str:Add,"/>
-        <Reference name="font" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,11,anim:,,null,"/>
-        <Reference name="graphic" value="null"/>
-        <Reference name="action" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,29,anim:,,str:btnAddActionAtmain,"/>
-    </Instance>
-    <Instance classID="ButtonModel" instanceID="ButtonModel4">
-        <Reference name="instanceName" value="str:btnEdit"/>
-        <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,bool:true,"/>
-        <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:292.0,4,null,"/>
-        <Reference name="layoutY" value="prop2:7,NOT_SET,4,null,4,null,14,anim:,,flt:6.0,4,null,"/>
-        <Reference name="layoutInfoWidth" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,15,anim:,,flt:54.0,"/>
-        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
-        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
-        <Reference name="clip" value="null"/>
-        <Reference name="tooltip" value="null"/>
-        <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,15,anim:,,str:Edit,"/>
-        <Reference name="graphic" value="null"/>
-    </Instance>
-    <Instance classID="ButtonModel" instanceID="ButtonModel5">
-        <Reference name="instanceName" value="str:btnDelete"/>
-        <Reference name="visible" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,bool:false,24,inst:StateVariableModel1,16,inst:StateModel1,16,anim:,,bool:true,"/>
-        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
-        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
-        <Reference name="clip" value="null"/>
-        <Reference name="tooltip" value="null"/>
-        <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,17,anim:,,str:Delete,"/>
-        <Reference name="graphic" value="null"/>
     </Instance>
 </Model>
