@@ -61,8 +61,14 @@ public class TaskModel {
             millis = task.getInterval();
         }
 
-        // TODO: Hours not displaying properly
-        labelText = "{%tH millis}:{%tM millis}:{%tS millis} - {task.getName()}";
+        var x = millis / 1000;
+        var seconds = x mod 60;
+        x /= 60;
+        var minutes = x mod 60;
+        x /= 60;
+        var hours = x mod 24;
+
+        labelText = "{%02d hours}:{%02d minutes}:{%02d seconds} - {task.getName()}";
 
         if (manager.isTaskRunning(task)) {
             buttonText = "stop";
@@ -413,11 +419,17 @@ public class Main {
 
         def model = lstTimers.selectedItem as TaskModel;
         var millis = model.task.getInterval();
+        var x = millis / 1000;
+        var seconds = x mod 60;
+        x /= 60;
+        var minutes = x mod 60;
+        x /= 60;
+        var hours = x mod 24;
 
         txtName.text = model.task.getName();
-        txtHours.text = "{%tH millis}";
-        txtMinutes.text = "{%tM millis}";
-        txtSeconds.text = "{%tS millis}";
+        txtHours.text = "{%02d hours}";
+        txtMinutes.text = "{%02d minutes}";
+        txtSeconds.text = "{%02d seconds}";
 
         edit = true;
         currentState.next();
