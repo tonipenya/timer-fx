@@ -10,6 +10,7 @@ import com.tonipenya.TimerManager;
 import com.tonipenya.ITask;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import timerdesktop.Popup;
 
 /**
  * @author tonipenya
@@ -18,6 +19,18 @@ def manager = new TimerManager();
 var models: TaskModel[];
 var taskID = 0;
 var edit: Boolean;
+
+public class MyTask extends Task {
+
+    override function run(): Void {
+        var popup = Popup {message: getName()};
+        
+        javafx.stage.Stage {
+            title: "Alarm!"
+            scene: popup.scene
+        }
+    }
+}
 
 public class TaskModel {
 
@@ -451,9 +464,21 @@ public class Main {
 
         if (edit) {
             def model:TaskModel = lstTimers.selectedItem as TaskModel;
-            models[lstTimers.selectedIndex]= TaskModel {task: new Task(model.task.getId(), txtName.text, millis) };
+
+            // TODO: there must be a way to call Task constructor from TaskModel
+            var task = MyTask{};
+            task.setId(model.task.getId());
+            task.setName(txtName.text);
+            task.setInterval(millis);
+            
+            models[lstTimers.selectedIndex]= TaskModel {task: task};
         } else {
-            insert TaskModel { task: new Task(taskID++, txtName.text, millis)} into models;
+            var task = MyTask{};
+            task.setId(taskID++);
+            task.setName(txtName.text);
+            task.setInterval(millis);
+            
+            insert TaskModel { task: task} into models;
         }
 
         currentState.previous();
@@ -465,10 +490,21 @@ public class Main {
 }
 
 function run (): Void {
-    insert TaskModel {task: new Task(1, "task 1", 5000) } into models;
-    insert TaskModel {task: new Task(2, "task 2", 10000) } into models;
-    insert TaskModel {task: new Task(3, "task 3", 8000) } into models;
-    insert TaskModel {task: new Task(4, "task 4", 10000) } into models;
+    var task = MyTask{};
+    task.setId(1);
+    task.setName("task 1");
+    task.setInterval(5000);
+    insert TaskModel {task: task} into models;
+    task = MyTask{};
+    task.setId(2);
+    task.setName("task 2");
+    task.setInterval(10000);
+    insert TaskModel {task: task} into models;
+    task = MyTask{};
+    task.setId(3);
+    task.setName("task 3");
+    task.setInterval(8000);
+    insert TaskModel {task: task } into models;
     taskID = 5;
 
     var design = Main {};
