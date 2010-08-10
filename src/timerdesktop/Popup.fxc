@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Model modelID="fxc" modelVersion="64" rootInstance="DesignModel1" version="1">
+    <Instance classID="DesignModel" instanceID="DesignModel1">
+        <List name="stateVariables">
+            <Item value="inst:StateVariableModel1"/>
+        </List>
+        <List name="resources">
+            <Item value="inst:FontModel1"/>
+        </List>
+        <List name="dataSources"/>
+        <List name="templates"/>
+        <Reference name="scene" value="inst:SceneModel1"/>
+        <Reference name="designWidth" value="flt:480.0"/>
+        <Reference name="designHeight" value="flt:320.0"/>
+        <Reference name="designProfile" value="profile:DESKTOP"/>
+        <Reference name="synchronizeDeviceAndSceneSizes" value="bool:true"/>
+    </Instance>
+    <Instance classID="StateVariableModel" instanceID="StateVariableModel1">
+        <Reference name="instanceName" value="str:currentState"/>
+        <List name="states"/>
+        <Reference name="startState" value="null"/>
+        <Reference name="stateChangeType" value="statechange:PAUSE_AND_PLAY_FROM_START"/>
+        <Reference name="doNotAnimateOnce" value="bool:true"/>
+        <Reference name="defaultInterpolator" value="interpolator:DISCRETE"/>
+        <Reference name="defaultDuration" value="int:0"/>
+        <Reference name="onTransitionFinished" value="null"/>
+    </Instance>
+    <Instance classID="FontModel" instanceID="FontModel1">
+        <Reference name="instanceName" value="str:fontbold16"/>
+        <Reference name="embolden" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,bool:true,4,null,"/>
+        <Reference name="size" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:16.0,4,null,"/>
+    </Instance>
+    <Instance classID="SceneModel" instanceID="SceneModel1">
+        <Reference name="instanceName" value="str:scene"/>
+        <List name="content">
+            <Item value="inst:LabelModel1"/>
+        </List>
+        <Reference name="width" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:254.0,4,null,"/>
+        <Reference name="height" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,flt:120.0,4,null,"/>
+        <Reference name="generateSceneInstance" value="bool:true"/>
+        <Reference name="generateGetDesignSceneFunction" value="bool:true"/>
+        <Reference name="generateLayoutXYForRootLevelComponents" value="bool:true"/>
+    </Instance>
+    <Instance classID="LabelModel" instanceID="LabelModel1">
+        <Reference name="instanceName" value="str:lblTaskName"/>
+        <Reference name="layoutX" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:97.0,4,null,"/>
+        <Reference name="layoutY" value="prop2:7,NOT_SET,4,null,4,null,15,anim:,,flt:52.0,4,null,"/>
+        <Reference name="gridLayoutInfoHLocation" value="int:0"/>
+        <Reference name="gridLayoutInfoVLocation" value="int:0"/>
+        <Reference name="clip" value="null"/>
+        <Reference name="tooltip" value="null"/>
+        <Reference name="text" value="prop2:7,NOT_SET,4,null,16,str:bind message,4,null,4,null,"/>
+        <Reference name="font" value="prop2:7,NOT_SET,4,null,4,null,22,anim:,,inst:FontModel1,4,null,"/>
+        <Reference name="graphic" value="null"/>
+    </Instance>
+</Model>
