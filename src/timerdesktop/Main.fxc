@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Model modelID="fxc" modelVersion="64" rootInstance="DesignModel1" version="1">
+<Model modelID="fxc" modelVersion="69" rootInstance="DesignModel1" version="1">
     <Instance classID="DesignModel" instanceID="DesignModel1">
         <List name="stateVariables">
             <Item value="inst:StateVariableModel1"/>
@@ -9,6 +9,7 @@
         </List>
         <List name="dataSources"/>
         <List name="templates"/>
+        <List name="customClasses"/>
         <Reference name="scene" value="inst:SceneModel1"/>
         <Reference name="designWidth" value="flt:480.0"/>
         <Reference name="designHeight" value="flt:320.0"/>
@@ -47,6 +48,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="node" value="inst:HBoxModel1"/>
     </Instance>
@@ -55,6 +58,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <List name="content">
             <Item value="inst:ButtonModel1"/>
             <Item value="inst:LabelModel1"/>
@@ -67,6 +72,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,48,str:bind (listCell.item as TaskModel).buttonText,4,null,4,null,"/>
         <Reference name="graphic" value="null"/>
@@ -77,6 +84,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,47,str:bind (listCell.item as TaskModel).labelText,4,null,4,null,"/>
         <Reference name="graphic" value="null"/>
@@ -104,6 +113,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="items" value="prop2:7,NOT_SET,4,null,15,str:bind models,4,null,4,null,"/>
         <Reference name="cellFactory" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,33,anim:,,inst:ListCellFactoryModel1,16,inst:StateModel2,11,anim:,,null,"/>
@@ -116,6 +127,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <List name="content">
             <Item value="inst:LabelModel2"/>
             <Item value="inst:TextBoxModel1"/>
@@ -136,6 +149,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,str:Label,24,inst:StateVariableModel1,16,inst:StateModel2,15,anim:,,str:Name,"/>
         <Reference name="graphic" value="null"/>
@@ -148,6 +163,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
     </Instance>
     <Instance classID="LabelModel" instanceID="LabelModel3">
@@ -158,6 +175,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:1"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,16,anim:,,str:Label,24,inst:StateVariableModel1,16,inst:StateModel2,16,anim:,,str:Delay,"/>
         <Reference name="graphic" value="null"/>
@@ -170,6 +189,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:1"/>
         <Reference name="gridLayoutInfoVLocation" value="int:1"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <List name="content">
             <Item value="inst:TextBoxModel2"/>
             <Item value="inst:TextBoxModel3"/>
@@ -188,6 +209,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,13,anim:,,str:00,4,null,"/>
         <Reference name="font" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel2,11,anim:,,null,"/>
@@ -201,6 +224,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,13,anim:,,str:00,4,null,"/>
     </Instance>
@@ -213,6 +238,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,13,anim:,,str:00,4,null,"/>
     </Instance>
@@ -224,6 +251,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:1"/>
         <Reference name="gridLayoutInfoVLocation" value="int:2"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <List name="content">
             <Item value="inst:ButtonModel2"/>
             <Item value="inst:ButtonModel3"/>
@@ -240,6 +269,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:2"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel2,13,anim:,,str:OK,"/>
         <Reference name="graphic" value="null"/>
@@ -251,6 +282,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel2,17,anim:,,str:Cancel,"/>
         <Reference name="graphic" value="null"/>
@@ -264,6 +297,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <List name="content">
             <Item value="inst:ButtonModel4"/>
             <Item value="inst:ButtonModel5"/>
@@ -280,6 +315,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,14,anim:,,str:Add,"/>
         <Reference name="font" value="prop2:7,NOT_SET,4,null,4,null,4,null,24,inst:StateVariableModel1,16,inst:StateModel1,11,anim:,,null,"/>
@@ -295,6 +332,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,15,anim:,,str:Edit,"/>
         <Reference name="graphic" value="null"/>
@@ -306,6 +345,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,4,null,17,anim:,,str:Button,24,inst:StateVariableModel1,16,inst:StateModel1,17,anim:,,str:Delete,"/>
         <Reference name="graphic" value="null"/>

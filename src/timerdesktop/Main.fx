@@ -5,12 +5,13 @@
  */
 package timerdesktop;
 
-import com.tonipenya.Task;
-import com.tonipenya.TimerManager;
-import com.tonipenya.ITask;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import timerdesktop.Popup;
+import com.tonipenya.timer.ICommand;
+import java.lang.String;
+import com.tonipenya.timer.dmo.ITask;
+import com.tonipenya.timer.TimerManager;
+import com.tonipenya.timer.dmo.Task;
 
 /**
  * @author tonipenya
@@ -20,11 +21,18 @@ var models: TaskModel[];
 var taskID = 0;
 var edit: Boolean;
 
-public class MyTask extends Task {
+public class MyCommand extends ICommand {
 
-    override function run(): Void {
+    public var task : ITask;
+
+
+    override public function getName () : String {
+        return task.getName();
+    }
+
+    override public function run () : Void {
         var popup = Popup {message: getName()};
-        
+
         javafx.stage.Stage {
             title: "Alarm!"
             scene: popup.scene
@@ -35,10 +43,12 @@ public class MyTask extends Task {
 public class TaskModel {
 
     var task: ITask;
+    var command : ICommand;
     var labelText;
     var buttonText;
 
     postinit {
+        command = Main.MyCommand{task: task};
         refreshLabels();
     }
 
@@ -54,11 +64,11 @@ public class TaskModel {
             };
 
     function startStopTask(): Void {
-        if (manager.isTaskRunning(task)) {
-            manager.stopTimer(task);
+        if (manager.isRunning(command)) {
+            manager.stopTimer(command);
             lTimeline.pause();
         } else {
-            manager.startTimer(task);
+            manager.startTimer(command, task.getInterval());
             lTimeline.play();
         }
 
@@ -68,8 +78,8 @@ public class TaskModel {
     function refreshLabels() {
         var millis: Long = 0;
 
-        if (manager.isTaskRunning(task)) {
-            millis = manager.getTimeRemaining(task);
+        if (manager.isRunning(command)) {
+            millis = manager.getTimeRemaining(command);
         } else {
             millis = task.getInterval();
         }
@@ -83,7 +93,7 @@ public class TaskModel {
 
         labelText = "{%02d hours}:{%02d minutes}:{%02d seconds} - {task.getName()}";
 
-        if (manager.isTaskRunning(task)) {
+        if (manager.isRunning(command)) {
             buttonText = "stop";
         } else {
             buttonText = "start";
@@ -285,8 +295,10 @@ public class Main {
                             btnOk.layoutX = 114.0;
                             btnOk.layoutY = 114.0;
                             btnOk.text = "Button";
+                            btnOk.action = null;
                             btnCancel.visible = false;
                             btnCancel.text = "Button";
+                            btnCancel.action = null;
                             flow2.visible = false;
                             flow2.wrapLength = 400.0;
                             grid.visible = false;
@@ -367,10 +379,13 @@ public class Main {
                             btnAdd.layoutX = 373.0;
                             btnAdd.layoutY = 56.0;
                             btnAdd.text = "Button";
+                            btnAdd.action = null;
                             btnEdit.visible = false;
                             btnEdit.text = "Button";
+                            btnEdit.action = null;
                             btnDelete.visible = false;
                             btnDelete.text = "Button";
+                            btnDelete.action = null;
                             vbox.visible = false;
                             vbox.layoutX = 298.0;
                             vbox.layoutY = 211.0;
@@ -465,18 +480,11 @@ public class Main {
         if (edit) {
             def model:TaskModel = lstTimers.selectedItem as TaskModel;
 
-            // TODO: there must be a way to call Task constructor from TaskModel
-            var task = MyTask{};
-            task.setId(model.task.getId());
-            task.setName(txtName.text);
-            task.setInterval(millis);
+            var task = new Task(model.task.getId(), txtName.text, millis);
             
             models[lstTimers.selectedIndex]= TaskModel {task: task};
         } else {
-            var task = MyTask{};
-            task.setId(taskID++);
-            task.setName(txtName.text);
-            task.setInterval(millis);
+            var task = new Task(taskID++, txtName.text, millis);
             
             insert TaskModel { task: task} into models;
         }
@@ -490,21 +498,13 @@ public class Main {
 }
 
 function run (): Void {
-    var task = MyTask{};
-    task.setId(1);
-    task.setName("task 1");
-    task.setInterval(5000);
+    var task = new Task(1, "task 1", 5000);
     insert TaskModel {task: task} into models;
-    task = MyTask{};
-    task.setId(2);
-    task.setName("task 2");
-    task.setInterval(10000);
+    task = new Task(2, "task 2", 10000);
     insert TaskModel {task: task} into models;
-    task = MyTask{};
-    task.setId(3);
-    task.setName("task 3");
-    task.setInterval(8000);
-    insert TaskModel {task: task } into models;
+    task = new Task(3, "task 3", 8000);
+    insert TaskModel {task: task} into models;
+    
     taskID = 5;
 
     var design = Main {};
