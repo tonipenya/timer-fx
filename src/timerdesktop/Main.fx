@@ -12,6 +12,10 @@ import java.lang.String;
 import com.tonipenya.timer.dmo.ITask;
 import com.tonipenya.timer.TimerManager;
 import com.tonipenya.timer.dmo.Task;
+import com.tonipenya.timer.dmo.ChainedTask;
+import com.tonipenya.timer.ChainedCommand;
+import com.tonipenya.timer.ITimerManager;
+import javafx.stage.Stage;
 
 /**
  * @author tonipenya
@@ -40,6 +44,34 @@ public class MyCommand extends ICommand {
     }
 }
 
+public class CCommand extends ChainedCommand {
+    public var task:ChainedTask;
+    public var manager:ITimerManager;
+    
+    postinit {
+        super.setManager(manager);
+        super.setTask(task);
+
+      var popup = Popup {message: getName()};
+
+        javafx.stage.Stage {
+            title: "Alarm!"
+            scene: popup.scene
+            visible:false
+        }
+    }
+
+    override public function implementation():Void {
+        var popup = Popup {message: getName()};
+
+        javafx.stage.Stage {
+            title: "Alarm!"
+            scene: popup.scene
+        }
+    }
+}
+
+
 public class TaskModel {
 
     var task: ITask;
@@ -48,7 +80,12 @@ public class TaskModel {
     var buttonText;
 
     postinit {
-        command = Main.MyCommand{task: task};
+        if (task instanceof ChainedTask) {
+            command = CCommand{task:task as ChainedTask, manager:manager};
+        } else {
+            command = Main.MyCommand{task: task};
+        }
+
         refreshLabels();
     }
 
@@ -68,7 +105,14 @@ public class TaskModel {
             manager.stopTimer(command);
             lTimeline.pause();
         } else {
-            manager.startTimer(command, task.getInterval());
+            var delay;
+             if (task instanceof ChainedTask) {
+                delay = (task as ChainedTask).getTasks()[0].getInterval();
+            } else {
+                delay = task.getInterval();
+            }
+
+            manager.startTimer(command, delay);
             lTimeline.play();
         }
 
@@ -91,12 +135,15 @@ public class TaskModel {
         x /= 60;
         var hours = x mod 24;
 
-        labelText = "{%02d hours}:{%02d minutes}:{%02d seconds} - {task.getName()}";
+        labelText = "{%02d hours}:{%02d minutes}:{%02d seconds}";
+
 
         if (manager.isRunning(command)) {
             buttonText = "stop";
+            labelText = "{labelText} - {command.getName()}"
         } else {
             buttonText = "start";
+            labelText = "{labelText} - {task.getName()}"
         }
     }
 }
@@ -498,12 +545,20 @@ public class Main {
 }
 
 function run (): Void {
+    var tasks : ITask[];
+
     var task = new Task(1, "task 1", 5000);
+    insert task into tasks;
     insert TaskModel {task: task} into models;
-    task = new Task(2, "task 2", 10000);
+    task = new Task(2, "task 2", 8000);
+    insert task into tasks;
     insert TaskModel {task: task} into models;
-    task = new Task(3, "task 3", 8000);
+    task = new Task(3, "task 3", 10000);
+    insert task into tasks;
     insert TaskModel {task: task} into models;
+    
+    var chained = new ChainedTask(4, "chain", tasks);
+    insert TaskModel {task: chained} into models;
     
     taskID = 5;
 
