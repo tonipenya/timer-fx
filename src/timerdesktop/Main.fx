@@ -29,18 +29,12 @@ public class MyCommand extends ICommand {
 
     public var task : ITask;
 
-
     override public function getName () : String {
         return task.getName();
     }
 
     override public function run () : Void {
-        var popup = Popup {message: getName()};
-
-        javafx.stage.Stage {
-            title: "Alarm!"
-            scene: popup.scene
-        }
+        openPopUp(getName());
     }
 }
 
@@ -52,22 +46,10 @@ public class CCommand extends ChainedCommand {
         super.setManager(manager);
         super.setTask(task);
 
-      var popup = Popup {message: getName()};
-
-        javafx.stage.Stage {
-            title: "Alarm!"
-            scene: popup.scene
-            visible:false
-        }
     }
 
     override public function implementation():Void {
-        var popup = Popup {message: getName()};
-
-        javafx.stage.Stage {
-            title: "Alarm!"
-            scene: popup.scene
-        }
+        openPopUp(getName());
     }
 }
 
@@ -106,7 +88,8 @@ public class TaskModel {
             lTimeline.pause();
         } else {
             var delay;
-             if (task instanceof ChainedTask) {
+
+            if (task instanceof ChainedTask) {
                 delay = (task as ChainedTask).getTasks()[0].getInterval();
             } else {
                 delay = task.getInterval();
@@ -526,13 +509,10 @@ public class Main {
 
         if (edit) {
             def model:TaskModel = lstTimers.selectedItem as TaskModel;
-
             var task = new Task(model.task.getId(), txtName.text, millis);
-            
             models[lstTimers.selectedIndex]= TaskModel {task: task};
         } else {
             var task = new Task(taskID++, txtName.text, millis);
-            
             insert TaskModel { task: task} into models;
         }
 
@@ -545,22 +525,34 @@ public class Main {
 }
 
 function run (): Void {
-    var tasks : ITask[];
 
-    var task = new Task(1, "task 1", 5000);
-    insert task into tasks;
+    var task = new Task(1, "task 1", 3000);
     insert TaskModel {task: task} into models;
-    task = new Task(2, "task 2", 8000);
-    insert task into tasks;
+    task = new Task(2, "task 2", 4000);
     insert TaskModel {task: task} into models;
-    task = new Task(3, "task 3", 10000);
-    insert task into tasks;
+    task = new Task(3, "task 3", 5000);
     insert TaskModel {task: task} into models;
+
+    var tasks : ITask[];
+    task = new Task(4, "timer", 900000);
+    insert task into tasks;
+    task = new Task(5, "phd", 900000);
+    insert task into tasks;
+    task = new Task(6, "pause", 300000);
+    insert task into tasks;
+    task = new Task(7, "chinese", 900000);
+    insert task into tasks;
+    task = new Task(8, "lotary", 900000);
+    insert task into tasks;
+    task = new Task(9, "random", 900000);
+    insert task into tasks;
+    task = new Task(10, "pause", 600000);
+    insert task into tasks;
     
-    var chained = new ChainedTask(4, "chain", tasks);
+    var chained = new ChainedTask(11, "chain", tasks);
     insert TaskModel {task: chained} into models;
     
-    taskID = 5;
+    taskID = 12;
 
     var design = Main {};
 
@@ -569,3 +561,13 @@ function run (): Void {
         scene: design.getDesignScene ()
     }
 }
+
+function openPopUp(message:String) {
+    var popup = Popup {message: message};
+
+    Stage {
+            title: "Alarm!"
+            scene: popup.getDesignScene()
+        }
+}
+

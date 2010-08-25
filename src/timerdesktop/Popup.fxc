@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Model modelID="fxc" modelVersion="64" rootInstance="DesignModel1" version="1">
+<Model modelID="fxc" modelVersion="69" rootInstance="DesignModel1" version="1">
     <Instance classID="DesignModel" instanceID="DesignModel1">
         <List name="stateVariables">
             <Item value="inst:StateVariableModel1"/>
@@ -9,6 +9,7 @@
         </List>
         <List name="dataSources"/>
         <List name="templates"/>
+        <List name="customClasses"/>
         <Reference name="scene" value="inst:SceneModel1"/>
         <Reference name="designWidth" value="flt:480.0"/>
         <Reference name="designHeight" value="flt:320.0"/>
@@ -48,6 +49,8 @@
         <Reference name="gridLayoutInfoHLocation" value="int:0"/>
         <Reference name="gridLayoutInfoVLocation" value="int:0"/>
         <Reference name="clip" value="null"/>
+        <Map name="customProperties"/>
+        <Reference name="customClass" value="null"/>
         <Reference name="tooltip" value="null"/>
         <Reference name="text" value="prop2:7,NOT_SET,4,null,16,str:bind message,4,null,4,null,"/>
         <Reference name="font" value="prop2:7,NOT_SET,4,null,4,null,22,anim:,,inst:FontModel1,4,null,"/>

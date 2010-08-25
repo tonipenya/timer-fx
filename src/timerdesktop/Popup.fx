@@ -44,12 +44,3 @@ public class Popup {
     // </editor-fold>//GEN-END:main
 
 }
-
-public function run (): Void {
-    var design = Popup {};
-
-    javafx.stage.Stage {
-        title: "Popup"
-        scene: design.getDesignScene ()
-    }
-}
